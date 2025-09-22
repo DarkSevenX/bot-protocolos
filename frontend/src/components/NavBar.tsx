@@ -1,4 +1,4 @@
-import { useNavigate } from '../context/RouterContext'
+// import { useNavigate } from '../context/RouterContext'
 import { LuGithub } from 'react-icons/lu'
 
 export const NavBar = () => {
