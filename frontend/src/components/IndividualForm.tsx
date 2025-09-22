@@ -28,9 +28,9 @@ export const IndividualForm = () => {
         showToast('Protocolo generado correctamente', 'success')
         setLoading(false)
       } catch (error: any) {
+        setLoading(false)
         console.log(error)
         console.log(error.response.data)
-        setLoading(false)
         showToast('Error al generar protocolo, intentalo mas tarde', 'error')
       }
     }
