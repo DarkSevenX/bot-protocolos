@@ -8,7 +8,7 @@ export const Loader = () => {
       <div className="relative flex flex-col items-center">
         <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
         <p className="mt-6 text-white text-lg font-semibold">
-          Generando protocolo...
+          Generando protocolo, esto puede tomar un rato...
         </p>
       </div>
     </div>
