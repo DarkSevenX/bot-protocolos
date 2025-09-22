@@ -12,7 +12,7 @@ const port = process.env.PORT || 8000
 
 app.use(
   cors({
-    origin: [`http://localhost:5173`, `${process.env.FRONT_PATH}`],
+    origin: process.env.FRONT_PATH,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   }),
