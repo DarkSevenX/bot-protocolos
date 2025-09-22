@@ -10,12 +10,14 @@ dotenv.config()
 const app = express()
 const port = process.env.PORT || 8000
 
-app.use(express.json())
 app.use(
   cors({
     origin: [`http://localhost:5173`, `${process.env.FRONT_PATH}`],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   }),
 )
+app.use(express.json())
 
 app.use(verifyApikey)
 app.use(errorHandler)
