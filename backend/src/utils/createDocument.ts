@@ -114,7 +114,7 @@ const createDocument = async (content: ProtocoloDocx) => {
   const titleMap: { [key: string]: string } = {
   'descripcion': 'Descripción del texto o actividad a realizar.',
   'palabras claves': 'Palabras claves.',
-  'objetivos': 'Objetivos de las lectuas o actividad a realizar.',
+  'objetivos': 'Objetivos de las lecturas o actividad a realizar.',
   'conceptos': 'Conceptos claves y definiciones.',
   'resumen': 'Resumen de la(as) lecturas.',
   'metodologia': 'Metodología de trabajo (Cómo realizó la actividad).',
