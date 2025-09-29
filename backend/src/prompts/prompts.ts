@@ -56,7 +56,7 @@ ejemplo:
   - ...item
   - ...item
 
-- conceptos: redactame un apartado de conceptos claves relacionados con los temas los conceptos clave y sus definicones no deben estar divididos por tema, si no que deben ser de todos en general y deben ser solo algunos cada concepto debe tener minimo 40 palabras y el numero de conceptos es maximo 7 y no debes enumearlos, en cambio sus subtitulos los debes poner entre asteriscos:
+- conceptos: redactame un apartado de conceptos claves relacionados con los temas los conceptos clave y sus definicones no deben estar divididos por tema, si no que deben ser de todos en general y deben ser solo algunos cada concepto debe tener minimo 40 palabras y el numero de conceptos es maximo 7 y no debes enumearlos, en cambio sus subtitulos los debes poner entre asteriscos (cuida los espacios entre parrafos):
 ejemplo:
   **concepto 1**: definicion, pero puedes usar asteriscos para representar partes en cursiva así *ejemplo*
 
