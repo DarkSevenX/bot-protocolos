@@ -4,6 +4,7 @@ import cors from 'cors'
 import errorHandler from './middleware/errorHandler'
 import { protocolController } from './controller/controller'
 import { verifyApikey } from './middleware/verifyApiKey'
+import {ping} from './controller/ping'
 
 dotenv.config()
 
@@ -19,10 +20,10 @@ app.use(
 )
 app.use(express.json())
 
-app.use(verifyApikey)
 app.use(errorHandler)
 
-app.post('/api/protocol', protocolController)
+app.post('/api/protocol', verifyApikey, protocolController)
+app.get('/api/ping', ping)
 
 app.listen(port)
 console.log('api corriendo en localhost:' + port)
