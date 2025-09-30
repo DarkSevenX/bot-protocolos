@@ -10,7 +10,7 @@ const errorHandler: ErrorRequestHandler = (error: Error, _req, res, _next) => {
   const status = error.status || 500
 
   console.log(error)
-  return res.status(status).json({ message })
+  res.status(status).json({ message })
 }
 
 export default errorHandler

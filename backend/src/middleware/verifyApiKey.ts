@@ -1,7 +1,8 @@
 import { RequestHandler } from 'express'
 import dotenv from 'dotenv'
+import {dotConfig} from '../config/dotenvConfig'
 
-dotenv.config()
+dotenv.config(dotConfig)
 
 export const verifyApikey: RequestHandler = (req,res,next) => {
   const apiKey = req.headers['key']
