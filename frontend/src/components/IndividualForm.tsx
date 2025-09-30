@@ -29,11 +29,10 @@ export const IndividualForm = () => {
         setLoading(false)
       } catch (error: any) {
         setLoading(false)
-        showToast('Error al generar protocolo, intentalo mas tarde', 'error')
-        console.log(error)
-        if (error) {
-          console.log(error.response.data)
-        }
+        showToast(error.message || 'Error al generar protocolo, intentalo mas tarde', 'error')
+        console.log('Error', error)
+      } finally {
+        setLoading(false)
       }
     }
   }
