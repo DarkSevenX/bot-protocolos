@@ -1,4 +1,4 @@
-export const prompt = (temas: string) => `
+export const indivudualPrompt = (temas: string) => `
 Genera un protocolo individual de revisión sistemática sobre el o los temas: "${temas}".
 
 Tu respuesta debe ser ÚNICAMENTE un objeto JSON VÁLIDO, sin explicaciones ni comentarios, sin bloques de código ni formato Markdown.
@@ -75,20 +75,19 @@ ejemplo:
 
 - bibliografia: quiero que me generes una bibliografia citada en apa, debe ser de maximo 5-6 referencias no quiero que hagas ningun tipo de comentario por tu parte, solamente quiero que me des lo que te pido. cada referencia no debe tener ningun tipo de comentario por tu parte NO debes poner ninguna clase de titulo, solo las referencias y mas nada tampoco quiero notas de advertencia, porfavor. las listas deben ser con - no pongas links
 
-
 Ejemplo de salida esperado:
 
 {
-  "Descripcion": "...",
-  "Palabras claves": "...",
-  "Objetivos": "...",
-  "Conceptos": "...",
-  "Resumen": "...",
-  "Metodologia": "...",
-  "Conclusiones",
-  "Discusiones": "ninguna.",
-  "Bibliografia": "..."
+  "descripcion": "...",
+  "palabras claves": "...",
+  "objetivos": "...",
+  "conceptos": "...",
+  "resumen": "...",
+  "metodologia": "...",
+  "conclusiones",
+  "discusiones": "ninguna.",
+  "bibliografia": "..."
 }
 
-No me des el JSON en un bloque MARKDOWN, repito NO
+No me des el JSON en un bloque MARKDOWN, repito NO me des un bloque Markdown
 `

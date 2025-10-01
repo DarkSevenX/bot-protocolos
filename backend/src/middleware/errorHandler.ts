@@ -9,7 +9,6 @@ const errorHandler: ErrorRequestHandler = (error: Error, _req, res, _next) => {
   const message = error.message || 'internal server error'
   const status = error.status || 500
 
-  console.log(error)
   res.status(status).json({ message })
 }
 

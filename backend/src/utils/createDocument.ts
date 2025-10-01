@@ -11,55 +11,27 @@ import {
   Footer,
   PageOrientation,
 } from 'docx'
-import { expectedKeys } from './expectedKeys'
 
-// Tipo para los elementos docx (importar desde markdownToDocx si está en TypeScript)
 type DocxElement = Paragraph | Table
 
-// Tipo para el objeto de entrada con firma de índice
 interface ProtocoloDocx {
-  pregunta: DocxElement[]
-  objetivos: DocxElement[]
-  criterios: DocxElement[]
-  busqueda: DocxElement[]
-  analisis: DocxElement[]
-  conclusiones: DocxElement[]
-  [key: string]: DocxElement[] // Firma de índice para acceso dinámico
+  [key: string]: DocxElement[]
 }
 
-// Configuración centralizada de estilos
 const STYLES = {
-  fonts: {
-    default: 'Arial',
-  },
-  sizes: {
-    title: 28, // 14 puntos
-    text: 24, // 12 puntos
-  },
-  colors: {
-    title: '002060', // Azul para el título principal
-    text: '000000', // Negro para el resto
-  },
-  spacing: {
-    line: 300, // Interlineado de 1.5
-    after: 20, // Espaciado después
-    before: 50, // Espaciado antes
-  },
+  fonts: { default: 'Arial' },
+  sizes: { title: 28, text: 24 },
+  colors: { title: '002060', text: '000000' },
+  spacing: { line: 300, after: 20, before: 50 },
   margins: {
     cell: { top: 10, bottom: 10, left: 80, right: 80 },
     page: { top: 1250, bottom: 1250, left: 1500, right: 1500 },
   },
-  table: {
-    width: 9000, // Ancho de la tabla en DXA
-    columnWidths: [9000],
-  },
-  page: {
-    width: 12240, // 8.5 pulgadas en Twips
-    height: 15840, // 11 pulgadas en Twips
-  },
+  table: { width: 9000, columnWidths: [9000] },
+  page: { width: 12240, height: 15840 },
 }
 
-// Función auxiliar para crear un párrafo
+// === Helpers reutilizables ===
 const createParagraph = (text: string, isMainTitle = false) =>
   new Paragraph({
     children: [
@@ -75,22 +47,17 @@ const createParagraph = (text: string, isMainTitle = false) =>
     spacing: STYLES.spacing,
   })
 
-// Función auxiliar para crear una celda de tabla
 const createTableCell = (
   title: string,
   content: DocxElement[] | null,
   isMainTitle = false,
 ) =>
   new TableCell({
-    children: [
-      createParagraph(title, isMainTitle), // Título (mainTitle para "Protocolo Individual")
-      ...(content ? content : []), // Contenido solo si existe
-    ],
+    children: [createParagraph(title, isMainTitle), ...(content ?? [])],
     margins: STYLES.margins.cell,
   })
 
-// Función auxiliar para crear una fila de tabla
-const createTableRow = (
+export const createTableRow = (
   title: string,
   content: DocxElement[] | null,
   isMainTitle = false,
@@ -99,8 +66,19 @@ const createTableRow = (
     children: [createTableCell(title, content, isMainTitle)],
   })
 
-const createDocument = async (content: ProtocoloDocx) => {
-  // Validar entrada
+// === Configuración para cada tipo de protocolo ===
+interface ProtocolConfig {
+  title: string
+  expectedKeys: string[]
+  titleMap: Record<string, string>
+  extraRows?: TableRow[]
+  highlightTitle?: boolean // si true → centrado y azul
+}
+
+export async function createDocument(
+  content: ProtocoloDocx,
+  { title, expectedKeys, titleMap, extraRows = [], highlightTitle = true }: ProtocolConfig,
+) {
   if (!content || typeof content !== 'object') {
     throw new Error('Content must be a valid object')
   }
@@ -110,28 +88,15 @@ const createDocument = async (content: ProtocoloDocx) => {
     throw new Error(`Missing required keys: ${missingKeys.join(', ')}`)
   }
 
-  // Mapear claves a títulos amigables
-  const titleMap: { [key: string]: string } = {
-  'descripcion': 'Descripción del texto o actividad a realizar.',
-  'palabras claves': 'Palabras claves.',
-  'objetivos': 'Objetivos de las lecturas o actividad a realizar.',
-  'conceptos': 'Conceptos claves y definiciones.',
-  'resumen': 'Resumen de la(as) lecturas.',
-  'metodologia': 'Metodología de trabajo (Cómo realizó la actividad).',
-  'conclusiones': 'Conclusiones de la lectura o actividad.',
-  'discusiones': 'Discusiones y recomendaciones.',
-  'bibliografia': 'Bibliografía. '
-  }
-
-  // Crear filas de la tabla
-  const rows = [
-    createTableRow('Protocolo Individual', null, true), // Primera fila: solo título, sin contenido
+  // Filas
+  const rows: TableRow[] = [
+    createTableRow(title, null, highlightTitle),
+    ...extraRows,
     ...expectedKeys.map((key) =>
-      createTableRow(titleMap[key] as any, content[key] as any, false),
-    ), // Resto de filas con títulos normales
+      createTableRow(titleMap[key] ?? key, content[key] as DocxElement[] , false),
+    ),
   ]
 
-  // Crear tabla
   const table = new Table({
     alignment: AlignmentType.CENTER,
     rows,
@@ -139,7 +104,6 @@ const createDocument = async (content: ProtocoloDocx) => {
     columnWidths: STYLES.table.columnWidths,
   })
 
-  // Crear documento
   const doc = new Document({
     sections: [
       {
@@ -153,27 +117,12 @@ const createDocument = async (content: ProtocoloDocx) => {
             margin: STYLES.margins.page,
           },
         },
-        headers: {
-          default: new Header({
-            children: [createParagraph(' ')], // Espacio en blanco para el encabezado
-          }),
-        },
-        footers: {
-          default: new Footer({
-            children: [createParagraph(' ')], // Espacio en blanco para el pie de página
-          }),
-        },
+        headers: { default: new Header({ children: [createParagraph(' ')] }) },
+        footers: { default: new Footer({ children: [createParagraph(' ')] }) },
         children: [table],
       },
     ],
   })
 
-  try {
-    return await Packer.toBuffer(doc)
-  } catch (error) {
-    console.error('Error generating document:', error)
-    throw error
-  }
+  return await Packer.toBuffer(doc)
 }
-
-export default createDocument

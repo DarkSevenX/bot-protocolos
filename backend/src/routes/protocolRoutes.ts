@@ -1,8 +1,11 @@
 import { Router } from 'express'
-import { colaborativo, individual } from '../controller/controller'
+import { protocolo } from '../controller/controller'
+import {validateTemas} from '../middleware/validateTemas'
 
 const protocolRoutes = Router()
+protocolRoutes.use(validateTemas)
 
 protocolRoutes
-  .post('/individual', individual)
-  .post('/colab', colaborativo)
+  .post('/protocolo', protocolo)
+
+export default protocolRoutes
