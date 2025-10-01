@@ -1,10 +1,10 @@
 import api from '../config/axios'
 
-export const createProtocol = async (temas: string, fileName: string) => {
+export const createProtocol = async (temas: string, type: string, fileName: string) => {
   try {
     const response = await api.post(
-      '/api/protocol',
-      { temas },
+      '/api/protocolo',
+      { temas, type },
       {
         responseType: 'blob', // Mantiene la expectativa de un archivo binario
       }

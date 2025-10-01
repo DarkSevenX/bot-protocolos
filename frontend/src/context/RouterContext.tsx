@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 
-type Routes = 'individual' | 'colab' | 'home'
+type Routes = 'main' | 'home'
 
 type RouterTypes = {
   route: Routes
@@ -9,12 +9,8 @@ type RouterTypes = {
 
 const RouterContext = createContext<RouterTypes | null>(null)
 
-export const RouterContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => {
-  const [route, setRoute] = useState<Routes>('individual')
+export const RouterContextProvider = ({ children }: { children: React.ReactNode }) => {
+  const [route, setRoute] = useState<Routes>('main')
 
   const navigate = (route: Routes) => {
     setRoute(route)
