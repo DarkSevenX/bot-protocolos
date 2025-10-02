@@ -19,6 +19,7 @@ export const colabExpectedKeys: string[] = [
   'encuentros conceptuales',
   'desencuentros conceptuales',
   'metodologia',
+  'conclusiones',
   'discusiones',
   'bibliografia'
 ]

@@ -73,9 +73,9 @@ ejemplo:
 
 Ejemplo: Si todos en el grupo acuerdan que la resiliencia comunitaria es clave para enfrentar el cambio climático, se detalla cómo esta idea une las perspectivas del equipo.
 
-- desencuentros conceptuales: Diferencias o debates surgidos en el grupo o en la literatura revisada sobre los conceptos o enfoques del tema. Se explican las discrepancias.
+- desencuentros conceptuales: Diferencias o debates surgidos en el grupo o en la literatura revisada sobre los conceptos o enfoques del tema. Se explican las discrepancias sin usar un leguaje muy academico y formal.
 
-- metodologia: La descripción detallada del enfoque, técnicas o métodos usados para desarrollar el protocolo. Incluye el tipo de investigación (cualitativa, cuantitativa, mixta), las herramientas (entrevistas, encuestas, análisis documental) y el proceso de trabajo colaborativo, recuerda redactarlo en plural.
+- metodologia: La descripción detallada del enfoque, y el proceso de trabajo colaborativo, recuerda redactarlo en plural.
 
 
 - conclusiones: conclusiones de la actividad, listadas por guiones medios -
